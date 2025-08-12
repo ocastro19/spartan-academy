@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spartan Academy - Academia de Artes Marciais</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="spartan-logo">
+                <i class="fas fa-fist-raised"></i>
+            </div>
+            <div class="loading-text">SPARTAN ACADEMY</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-fist-raised"></i>
+                <span>SPARTAN</span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active">Início</a>
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="#students" class="nav-link">Alunos</a>
+                <a href="#classes" class="nav-link">Aulas</a>
+                <a href="#payments" class="nav-link">Pagamentos</a>
+                <a href="#shop" class="nav-link">Loja</a>
+            </div>
+            <div class="nav-auth">
+                <button class="btn-login" onclick="showLoginModal()">Login</button>
+                <button class="btn-register" onclick="showRegisterModal()">Cadastrar</button>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-background">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="title-main">SPARTAN</span>
+                        <span class="title-sub">ACADEMY</span>
+                    </h1>
+                    <p class="hero-subtitle">Forje seu corpo, mente e espírito através das artes marciais</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" id="total-students">0</div>
+                            <div class="stat-label">Alunos Ativos</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="total-classes">0</div>
+                            <div class="stat-label">Aulas Ministradas</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="total-graduations">0</div>
+                            <div class="stat-label">Graduações</div>
+                        </div>
+                    </div>
+                    <div class="hero-actions">
+                        <button class="btn-primary" onclick="showSection('dashboard')">Acessar Dashboard</button>
+                        <button class="btn-secondary" onclick="showSection('students')">Gerenciar Alunos</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> Dashboard</h2>
+                <p>Visão geral do sistema</p>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Estatísticas Gerais</h3>
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="dash-students">0</div>
+                                <div class="stat-name">Alunos</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon"><i class="fas fa-calendar"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="dash-classes">0</div>
+                                <div class="stat-name">Aulas</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="dash-revenue">R$ 0</div>
+                                <div class="stat-name">Receita</div>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon"><i class="fas fa-medal"></i></div>
+                            <div class="stat-info">
+                                <div class="stat-value" id="dash-graduations">0</div>
+                                <div class="stat-name">Graduações</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Aulas Recentes</h3>
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="recent-classes" id="recent-classes">
+                        <div class="loading-placeholder">Carregando aulas...</div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Pagamentos Pendentes</h3>
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="pending-payments" id="pending-payments">
+                        <div class="loading-placeholder">Carregando pagamentos...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Students Section -->
+        <section id="students" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-users"></i> Gerenciar Alunos</h2>
+                <button class="btn-primary" onclick="showAddStudentModal()">Adicionar Aluno</button>
+            </div>
+            <div class="students-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="student-search" placeholder="Buscar aluno...">
+                </div>
+                <div class="filter-box">
+                    <select id="student-filter">
+                        <option value="all">Todos os Alunos</option>
+                        <option value="active">Ativos</option>
+                        <option value="inactive">Inativos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="students-grid" id="students-grid">
+                <div class="loading-placeholder">Carregando alunos...</div>
+            </div>
+        </section>
+
+        <!-- Classes Section -->
+        <section id="classes" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-calendar-alt"></i> Aulas</h2>
+                <button class="btn-primary" onclick="showAddClassModal()">Agendar Aula</button>
+            </div>
+            <div class="classes-calendar" id="classes-calendar">
+                <div class="calendar-header">
+                    <button class="btn-nav" onclick="previousMonth()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <h3 id="calendar-month">Janeiro 2024</h3>
+                    <button class="btn-nav" onclick="nextMonth()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Calendar will be generated by JavaScript -->
+                </div>
+            </div>
+            <div class="classes-list" id="classes-list">
+                <div class="loading-placeholder">Carregando aulas...</div>
+            </div>
+        </section>
+
+        <!-- Payments Section -->
+        <section id="payments" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-credit-card"></i> Pagamentos</h2>
+                <button class="btn-primary" onclick="showAddPaymentModal()">Registrar Pagamento</button>
+            </div>
+            <div class="payments-summary">
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="summary-info">
+                        <div class="summary-value" id="payments-received">R$ 0</div>
+                        <div class="summary-label">Recebidos</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-clock"></i></div>
+                    <div class="summary-info">
+                        <div class="summary-value" id="payments-pending">R$ 0</div>
+                        <div class="summary-label">Pendentes</div>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon"><i class="fas fa-times-circle"></i></div>
+                    <div class="summary-info">
+                        <div class="summary-value" id="payments-overdue">R$ 0</div>
+                        <div class="summary-label">Atrasados</div>
+                    </div>
+                </div>
+            </div>
+            <div class="payments-table" id="payments-table">
+                <div class="loading-placeholder">Carregando pagamentos...</div>
+            </div>
+        </section>
+
+        <!-- Shop Section -->
+        <section id="shop" class="section">
+            <div class="section-header">
+                <h2><i class="fas fa-store"></i> Loja</h2>
+                <button class="btn-primary" onclick="showAddProductModal()">Adicionar Produto</button>
+            </div>
+            <div class="shop-categories">
+                <button class="category-btn active" data-category="all">Todos</button>
+                <button class="category-btn" data-category="uniforms">Uniformes</button>
+                <button class="category-btn" data-category="equipment">Equipamentos</button>
+                <button class="category-btn" data-category="accessories">Acessórios</button>
+            </div>
+            <div class="products-grid" id="products-grid">
+                <div class="loading-placeholder">Carregando produtos...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay">
+        <!-- Login Modal -->
+        <div id="login-modal" class="modal">
+            <div class="modal-header">
+                <h3>Login</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="login-form" class="modal-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Entrar</button>
+            </form>
+        </div>
+
+        <!-- Register Modal -->
+        <div id="register-modal" class="modal">
+            <div class="modal-header">
+                <h3>Cadastrar</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="register-form" class="modal-form">
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirmar Senha</label>
+                    <input type="password" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn-primary">Cadastrar</button>
+            </form>
+        </div>
+
+        <!-- Add Student Modal -->
+        <div id="add-student-modal" class="modal">
+            <div class="modal-header">
+                <h3>Adicionar Aluno</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="add-student-form" class="modal-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome Completo</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="tel" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Data de Nascimento</label>
+                        <input type="date" name="birthDate" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Endereço</label>
+                    <textarea name="address" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Modalidade</label>
+                        <select name="modality" required>
+                            <option value="">Selecione...</option>
+                            <option value="karate">Karatê</option>
+                            <option value="judo">Judô</option>
+                            <option value="taekwondo">Taekwondo</option>
+                            <option value="muay-thai">Muay Thai</option>
+                            <option value="jiu-jitsu">Jiu-Jitsu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Graduação</label>
+                        <select name="graduation">
+                            <option value="white">Faixa Branca</option>
+                            <option value="yellow">Faixa Amarela</option>
+                            <option value="orange">Faixa Laranja</option>
+                            <option value="green">Faixa Verde</option>
+                            <option value="blue">Faixa Azul</option>
+                            <option value="brown">Faixa Marrom</option>
+                            <option value="black">Faixa Preta</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Adicionar Aluno</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
